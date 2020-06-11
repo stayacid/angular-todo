@@ -18,6 +18,9 @@ body {
   strong {
     margin-right: 1rem;
   }
+  small {
+    margin: 0 1rem 0 auto!important;
+  }
 }
 
 .todo_list {
@@ -25,7 +28,7 @@ body {
     width: 20px;
     height: 20px;
     line-height: 20px;
-    margin-left: auto !important; // well...
+    margin-left: 2rem !important; // well...
 
     .mat-button-wrapper {
       padding: 0;
