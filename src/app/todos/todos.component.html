@@ -1,0 +1,16 @@
+<mat-selection-list class="todo_list">
+  <mat-list-option
+    *ngFor="let todo of todos; let i = index"
+    checkboxPosition="before"
+  >
+    <strong>{{ i + 1 }}</strong>
+    {{ todo.title }}
+    <button
+      mat-mini-fab
+      color="warn"
+      aria-label="Example icon button with a filter list icon"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-list-option>
+</mat-selection-list>
