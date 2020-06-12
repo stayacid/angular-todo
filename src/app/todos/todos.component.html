@@ -1,20 +1,39 @@
-<mat-selection-list class="todo_list" (selectionChange)="onChange($event)">
-  <mat-list-option
-    *ngFor="let todo of todosService.todos; let i = index"
-    checkboxPosition="before"
-    [selected]="todo.completed"
-    [value]="todo"
+<div *ngIf="!loading">
+  <mat-selection-list
+    *ngIf="todosService.todos.length; else noTodos"
+    class="todo_list"
+    (selectionChange)="onChange($event)"
   >
-    <strong>{{ i + 1 }}</strong>
-    <p>{{ todo.title }}</p>
-    <small>{{ todo.date | date:"d/M/yyyy h:mm" }}</small>
-    <button
-      mat-mini-fab
-      color="warn"
-      aria-label="Example icon button with a filter list icon"
-      (click)="removeTodo($event, todo.id)"
+    <mat-list-option
+      *ngFor="let todo of todosService.todos; let i = index"
+      checkboxPosition="before"
+      [selected]="todo.completed"
+      [value]="todo"
     >
-      <mat-icon>clear</mat-icon>
-    </button>
-  </mat-list-option>
-</mat-selection-list>
+      <strong>{{ i + 1 }}</strong>
+      <p>{{ todo.title }}</p>
+      <small>{{ todo.date | date: "d/M/yyyy h:mm" }}</small>
+      <button
+        mat-mini-fab
+        color="warn"
+        aria-label="Example icon button with a filter list icon"
+        (click)="removeTodo($event, todo.id)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <ng-template #noTodos>
+    <p style="text-align: center;">All done!</p>
+  </ng-template>
+</div>
+
+<div *ngIf="loading" class="loader">
+  <div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
