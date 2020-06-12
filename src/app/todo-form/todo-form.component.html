@@ -1,7 +1,22 @@
-<form class="example-form" (ngSubmit)="addTodo($event)">
+<form
+  [formGroup]="addForm"
+  class="add_todo-form"
+  novalidate
+  (ngSubmit)="addTodo(addForm.value)"
+>
   <mat-form-field>
     <mat-label>Add todo</mat-label>
-    <input matInput placeholder="Ex. Buy beer" formControlName="todo">
+    <input matInput placeholder="Ex. Buy beer" formControlName="title" />
+    <mat-error *ngIf="hasError('title', 'required')"
+      >You can't add nothing</mat-error
+    >
   </mat-form-field>
-  <button mat-flat-button color="accent" type="submit">Add</button>
+  <button
+    mat-flat-button
+    color="accent"
+    type="submit"
+    [disabled]="!addForm.valid"
+  >
+    Add
+  </button>
 </form>

@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
 
 // material components
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
 
 // app components
 import { AppComponent } from './app.component';
@@ -21,12 +20,12 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
