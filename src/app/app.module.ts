@@ -8,12 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // app components
 import { AppComponent } from './app.component';
-import { TodosComponent } from './todos/todos.component';
+import { TodosComponent } from './components/todos/todos.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TodoFormComponent } from './todo-form/todo-form.component';
+import { TodoFormComponent } from './components/todo-form/todo-form.component';
 
 @NgModule({
   declarations: [AppComponent, TodosComponent, TodoFormComponent],
@@ -25,6 +26,7 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
   ],
   providers: [],

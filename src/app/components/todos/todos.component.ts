@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TodosService } from '../shared/todos.service';
+import { TodosService } from '../../shared/todos.service';
+
 
 @Component({
   selector: 'app-todos',
@@ -34,6 +35,9 @@ export class TodosComponent implements OnInit {
 
   removeTodo(event: Event, id: number) {
     event.stopPropagation();
+    // const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
     this.todosService.removeTodo(id);
   }
 }
+
