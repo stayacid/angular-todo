@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../../shared/todos.service';
-
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-todos',
@@ -14,7 +14,7 @@ export class TodosComponent implements OnInit {
   // @Output() onToggle = new EventEmitter<number>()
   public loading: boolean = true;
 
-  constructor(public todosService: TodosService) {}
+  constructor(public todosService: TodosService, public dialog: MatDialog) {}
 
   // hook
   ngOnInit(): void {
@@ -35,9 +35,15 @@ export class TodosComponent implements OnInit {
 
   removeTodo(event: Event, id: number) {
     event.stopPropagation();
-    // const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-    this.todosService.removeTodo(id);
+    const dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      result ? this.todosService.removeTodo(id) : false;
+    });
   }
 }
 
+@Component({
+  selector: 'dialog-delete-todo',
+  templateUrl: '../dialog.html',
+})
+export class DialogComponent {}

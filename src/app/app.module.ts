@@ -9,20 +9,30 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // app components
 import { AppComponent } from './app.component';
-import { TodosComponent } from './components/todos/todos.component';
+import {
+  TodosComponent,
+  DialogComponent,
+} from './components/todos/todos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
 
 @NgModule({
-  declarations: [AppComponent, TodosComponent, TodoFormComponent],
+  declarations: [
+    AppComponent,
+    DialogComponent,
+    TodoFormComponent,
+    TodosComponent,
+  ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     MatButtonModule,
+    MatDialogModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -31,5 +41,6 @@ import { TodoFormComponent } from './components/todo-form/todo-form.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [AppComponent, DialogComponent],
 })
 export class AppModule {}
