@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo, TodosService } from '../shared/todos.service';
+import { TodosService } from '../shared/todos.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Todo } from '../todo.interface';
 
 @Component({
   selector: 'app-todo-form',
@@ -13,26 +14,32 @@ export class TodoFormComponent implements OnInit {
   constructor(public todosService: TodosService) {}
 
   ngOnInit(): void {
+    this.genForm();
+  }
+
+  genForm() {
     this.addForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
+      title: new FormControl(null, [Validators.required]),
     });
   }
 
-  public hasError = (controlName: string, errorName: string) => {
-    return this.addForm.controls[controlName].hasError(errorName);
-  };
+  genId(): number {
+    return this.todosService.todos.length > 0
+      ? Math.max(...this.todosService.todos.map((todo) => todo.id)) + 1
+      : 0;
+  }
 
   addTodo(addFormValue: { title: string }) {
     if (this.addForm.valid) {
       const todo: Todo = {
+        userId: 1,
+        id: this.genId(),
         title: addFormValue.title,
-        id: Date.now(),
         completed: false,
         //date: new Date(),
       };
       this.todosService.addTodo(todo);
       this.addForm.reset();
-      // this.addForm.controls.title = ''
     }
   }
 }

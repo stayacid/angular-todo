@@ -24,10 +24,12 @@ export class TodosComponent implements OnInit {
 
   // methods
   onChange(event: { option: { _value: { id: number } } }) {
-    // event.source._value will return all selected items
-    // event.option._value will return event.target value
-    // event.option._selected will return event.target is cheched or not
     this.todosService.onToggle(event.option._value.id);
+  }
+
+  editTodo(e: Event, id: number) {
+    const target = e.target as HTMLInputElement;
+    this.todosService.editTodo(id, target.value);
   }
 
   removeTodo(event: Event, id: number) {

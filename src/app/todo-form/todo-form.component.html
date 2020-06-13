@@ -7,16 +7,15 @@
   <mat-form-field>
     <mat-label>Add todo</mat-label>
     <input matInput placeholder="Ex. Buy beer" formControlName="title" />
-    <mat-error *ngIf="hasError('title', 'required')"
-      >You can't add nothing</mat-error
-    >
+    <mat-error *ngIf="!addForm.controls['title'].valid && addForm.controls['title'].touched">
+      You can't add nothing
+    </mat-error>
   </mat-form-field>
   <button
     mat-flat-button
     color="accent"
     type="submit"
-    [disabled]="!addForm.valid"
-  >
+    [disabled]="!addForm.valid">
     Add
   </button>
 </form>

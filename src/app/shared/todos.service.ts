@@ -2,13 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
-export interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-  date?: any;
-}
+import { Todo } from '../todo.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TodosService {
@@ -23,8 +17,7 @@ export class TodosService {
   }
 
   onToggle(id: number) {
-    console.log(id);
-    const idx = this.todos.findIndex((t) => t.id === id);
+    const idx: number = this.todos.findIndex((t) => t.id === id);
     this.todos[idx].completed = !this.todos[idx].completed;
   }
 
@@ -33,6 +26,12 @@ export class TodosService {
   }
 
   addTodo(todo: Todo) {
-    this.todos.push(todo)
+    this.todos.push(todo);
+  }
+
+  editTodo(id: number, title: string) {
+    const idx: number = this.todos.findIndex((t) => t.id === id);
+    this.todos[idx].title = title;
+    console.log(this.todos);
   }
 }
