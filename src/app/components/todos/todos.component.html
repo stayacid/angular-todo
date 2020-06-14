@@ -2,7 +2,7 @@
   <mat-selection-list
     *ngIf="todosService.todos.length; else noTodos"
     class="todo_list"
-    (selectionChange)="onChange($event)"
+    (selectionChange)="onToggle($event)"
   >
     <mat-list-option
       *ngFor="let todo of todosService.todos; let i = index"
@@ -10,6 +10,7 @@
       [selected]="todo.completed"
       [value]="todo.title"
       (keydown)="$event.stopPropagation()"
+      [attr.id]="todo.id"
     >
       <strong>{{ i + 1 }}</strong>
       <input 

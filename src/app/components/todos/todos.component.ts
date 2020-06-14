@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../../shared/todos.service';
+import { SnackService } from '../../shared/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -14,7 +15,11 @@ export class TodosComponent implements OnInit {
   // @Output() onToggle = new EventEmitter<number>()
   public loading: boolean = true;
 
-  constructor(public todosService: TodosService, public dialog: MatDialog) {}
+  constructor(
+    public todosService: TodosService,
+    private dialog: MatDialog,
+    private snackService: SnackService
+  ) {}
 
   // hook
   ngOnInit(): void {
@@ -28,8 +33,20 @@ export class TodosComponent implements OnInit {
   }
 
   // methods
-  onChange(event: { option: { _value: { id: number } } }) {
-    this.todosService.onToggle(event.option._value.id);
+  onToggle(event: {
+    option: {
+      _element: {
+        nativeElement: { id: string };
+      };
+    };
+  }) {
+    this.snackService.openSnackBar('Changing...');
+    this.todosService
+      .onToggle(parseInt(event.option._element.nativeElement.id, 10)) // have no time to find more simple way
+      .subscribe(
+        (todo) => this.snackService.openSnackBar('Changed!', 2000),
+        (err) => this.snackService.openSnackBar("Can't change :(", 2000)
+      );
   }
 
   editTodo(e: Event, id: number) {

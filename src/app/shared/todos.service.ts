@@ -27,9 +27,22 @@ export class TodosService {
     );
   }
 
-  onToggle(id: number) {
+  onToggle(id: number): Observable<Todo> {
     const idx: number = this.todos.findIndex((t) => t.id === id);
-    this.todos[idx].completed = !this.todos[idx].completed;
+
+    return this.http
+      .patch<Todo>(
+        `${this.url}/posts/${id}`,
+        { completed: !this.todos[idx].completed },
+        this.httpOptions
+      )
+      .pipe(
+        map((res) => {
+          this.todos[idx].completed = !this.todos[idx].completed;
+          return res;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   removeTodo(id: number) {
