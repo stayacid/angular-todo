@@ -38,7 +38,9 @@ export class TodoFormComponent implements OnInit {
         completed: false,
         //date: new Date(),
       };
-      this.todosService.addTodo(todo);
+      this.todosService.addTodo(todo).subscribe((todo) => {
+        console.log(todo);
+      });
       this.addForm.reset();
     }
   }

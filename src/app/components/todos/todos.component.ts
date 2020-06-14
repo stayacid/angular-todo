@@ -18,6 +18,10 @@ export class TodosComponent implements OnInit {
 
   // hook
   ngOnInit(): void {
+    this.fetchTodos();
+  }
+
+  fetchTodos() {
     this.todosService.fetchTodos().subscribe(() => {
       this.loading = false;
     });
