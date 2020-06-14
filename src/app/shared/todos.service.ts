@@ -37,13 +37,11 @@ export class TodosService {
   }
 
   addTodo(todo: Todo): Observable<Todo> {
-    console.log('Adding...');
     // fake post
     return this.http
       .post<Todo>(`${this.url}/posts`, todo, this.httpOptions)
       .pipe(
         map((res) => {
-          console.log('Added!');
           this.todos.push(todo);
           return res;
         }),

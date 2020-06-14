@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodosService } from '../../shared/todos.service';
+import { SnackService } from '../../shared/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Todo } from '../../todo.interface';
 
@@ -11,7 +12,10 @@ import { Todo } from '../../todo.interface';
 export class TodoFormComponent implements OnInit {
   public addForm: FormGroup;
 
-  constructor(public todosService: TodosService) {}
+  constructor(
+    public todosService: TodosService,
+    private snackService: SnackService
+  ) {}
 
   ngOnInit(): void {
     this.genForm();
@@ -30,6 +34,7 @@ export class TodoFormComponent implements OnInit {
   }
 
   addTodo(addFormValue: { title: string }) {
+    this.snackService.openSnackBar('Adding...');
     if (this.addForm.valid) {
       const todo: Todo = {
         userId: 1,
@@ -38,9 +43,10 @@ export class TodoFormComponent implements OnInit {
         completed: false,
         //date: new Date(),
       };
-      this.todosService.addTodo(todo).subscribe((todo) => {
-        console.log(todo);
-      });
+      this.todosService.addTodo(todo).subscribe(
+        (todo) => this.snackService.openSnackBar('Added!', 2000),
+        (err) => this.snackService.openSnackBar("Can't add :(", 2000)
+      );
       this.addForm.reset();
     }
   }

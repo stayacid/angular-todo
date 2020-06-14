@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // app components
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { TodoFormComponent } from './components/todo-form/todo-form.component';
     MatInputModule,
     MatListModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
   ],
   providers: [],
