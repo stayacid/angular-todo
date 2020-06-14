@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TodosService } from '../../shared/todos.service';
-import { SnackService } from '../../shared/snackbar.service';
+import { TodosService } from '../../shared/services/todos.service';
+import { SnackService } from '../../shared/services/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Todo } from '../../todo.interface';
+import { Todo } from '../../shared/interfaces/todo.interface';
 
 @Component({
   selector: 'app-todo-form',

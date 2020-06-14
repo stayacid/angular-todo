@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
-import { Todo } from '../todo.interface';
+import { Todo } from '../interfaces/todo.interface';
 
 @Injectable({ providedIn: 'root' })
 export class TodosService {
