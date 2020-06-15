@@ -40,25 +40,35 @@ export class TodosComponent implements OnInit {
       };
     };
   }) {
-    this.snackService.openSnackBar('Changing...');
+    this.snackService.openSnackBar('Saving...');
     this.todosService
       .onToggle(parseInt(event.option._element.nativeElement.id, 10)) // have no time to find more simple way
       .subscribe(
-        (todo) => this.snackService.openSnackBar('Changed!', 2000),
-        (err) => this.snackService.openSnackBar("Can't change :(", 2000)
+        (res) => this.snackService.openSnackBar('Saved!', 2000),
+        (err) => this.snackService.openSnackBar("Can't save :(", 2000)
       );
   }
 
   editTodo(e: Event, id: number) {
+    this.snackService.openSnackBar('Saving...');
     const target = e.target as HTMLInputElement;
-    this.todosService.editTodo(id, target.value);
+    this.todosService.editTodo(id, target.value).subscribe(
+      (res) => this.snackService.openSnackBar('Saved!', 2000),
+      (err) => this.snackService.openSnackBar("Can't save :(", 2000)
+    );
   }
 
   removeTodo(event: Event, id: number) {
     event.stopPropagation();
     const dialogRef = this.dialog.open(DialogComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      result ? this.todosService.removeTodo(id) : false;
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.snackService.openSnackBar('Deleting...');
+        this.todosService.removeTodo(id).subscribe(
+          (res) => this.snackService.openSnackBar('Deleted!', 2000),
+          (err) => this.snackService.openSnackBar("Can't delete :(", 2000)
+        );
+      }
     });
   }
 }

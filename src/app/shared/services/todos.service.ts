@@ -45,8 +45,14 @@ export class TodosService {
       );
   }
 
-  removeTodo(id: number) {
-    this.todos = this.todos.filter((t) => t.id !== id);
+  removeTodo(id: number): Observable<{}> {
+    return this.http.delete<Todo>(`${this.url}/posts/${id}`).pipe(
+      map((res) => {
+        this.todos = this.todos.filter((t) => t.id !== id);
+        return res;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   addTodo(todo: Todo): Observable<Todo> {
@@ -64,7 +70,16 @@ export class TodosService {
 
   editTodo(id: number, title: string) {
     const idx: number = this.todos.findIndex((t) => t.id === id);
-    this.todos[idx].title = title;
+
+    return this.http
+      .patch<Todo>(`${this.url}/posts/${id}`, { title }, this.httpOptions)
+      .pipe(
+        map((res) => {
+          this.todos[idx].title = title;
+          return res;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
