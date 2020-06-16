@@ -11,7 +11,7 @@ import { Todo } from '../interfaces/todo.interface';
 @Injectable({ providedIn: 'root' })
 export class TodosService {
   public todos: Todo[] = [];
-  private url: string = 'https://jsonplaceholder.typicode.com';
+  private url: string = 'https://cors-anywhere.herokuapp.com/https://jsonplaceholder.typicode.com';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json; charset=UTF-8',
