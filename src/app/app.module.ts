@@ -26,6 +26,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TodoComponent } from './components/todo/todo.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGX8jfeiFVmqzS-AmXXtjSoOBNQ29Knlk",
@@ -41,13 +42,15 @@ const firebaseConfig = {
   declarations: [
     AppComponent,
     DialogComponent,
+    LoginComponent,
+    TodoComponent,
     TodoFormComponent,
     TodosComponent,
-    LoginComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
@@ -59,7 +62,6 @@ const firebaseConfig = {
     MatProgressSpinnerModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

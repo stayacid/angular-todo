@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { AppComponent } from './app.component';
+import { TodoComponent } from './components/todo/todo.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
-    children: [
-      { path: 'app', component: AppComponent },
-    ],
+  },
+  {
+    path: 'app',
+    component: TodoComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
