@@ -28,8 +28,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthService } from "./shared/services/auth.service";
-import { firebaseConfig } from '../environments/environment';
+import { firebaseConfig } from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
