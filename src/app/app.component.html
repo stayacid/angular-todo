@@ -1,4 +1,12 @@
 <div class="container">
-  <h1 >{{ appTitle }}</h1>
+  <button
+    mat-flat-button
+    color="warn"
+    *ngIf="authService.isLoggedIn"
+    (click)="authService.SignOut()"
+  >
+    Log out
+  </button>
+  <h1>{{ appTitle }}</h1>
   <router-outlet></router-outlet>
 </div>
