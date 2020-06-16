@@ -1,55 +1,30 @@
-<div class="authBlock">
-  <h3>Sign In</h3>
-  <div class="formGroup">
-    <input
-      type="text"
-      class="formControl"
-      placeholder="Username"
-      #userName
-      required
-    />
-  </div>
-
-  <div class="formGroup">
-    <input
-      type="password"
-      class="formControl"
-      placeholder="Password"
-      #userPassword
-      required
-    />
-  </div>
-
-  <!-- Calling SignIn Api from AuthService -->
-  <div class="formGroup">
-    <input
-      type="button"
-      class="btn btnPrimary"
-      value="Log in"
-      (click)="authService.SignIn(userName.value, userPassword.value)"
-    />
-  </div>
-</div>
-
-<!--
+<h3>Sign In</h3>
 <form
-  [formGroup]="addForm"
+  [formGroup]="loginForm"
   class="add_todo-form"
   novalidate
-  (ngSubmit)="addTodo(addForm.value)"
+  (ngSubmit)="authService.signIn(loginForm.value)"
 >
   <mat-form-field>
-    <mat-label>Add todo</mat-label>
-    <input matInput placeholder="Ex. Buy beer" formControlName="title" />
-    <mat-error *ngIf="!addForm.controls['title'].valid && addForm.controls['title'].touched">
-      You can't add nothing
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="stayacid@gmail.com" formControlName="email" />
+    <mat-error *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">
+      Try "stayacid@gmail.com"
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="pass123" formControlName="password" />
+    <mat-error *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+      Try "pass123"
     </mat-error>
   </mat-form-field>
   <button
     mat-flat-button
     color="accent"
     type="submit"
-    [disabled]="!addForm.valid">
-    Add
+    [disabled]="!loginForm.valid">
+    Login
   </button>
-</form>  -->
+</form>

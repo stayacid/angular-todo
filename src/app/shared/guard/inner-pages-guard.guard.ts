@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { AuthService } from "../../shared/services/auth.service";
+import { AuthService } from "../services/auth.service";
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SecureInnerPagesGuard implements CanActivate {
+export class InnerPagesGuard implements CanActivate {
   constructor(
     public authService: AuthService,
     public router: Router
@@ -16,8 +16,7 @@ export class SecureInnerPagesGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       if(this.authService.isLoggedIn) {
-        window.alert("You are not allowed to access this URL!");
-         this.router.navigate(['app'])
+        this.router.navigate(['app'])
       }
     return true;
   }

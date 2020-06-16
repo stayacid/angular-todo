@@ -41,15 +41,13 @@ export class AuthService {
   }
 
   // Sign in with email/password
-  SignIn(email, password) {
+  signIn(value: { email: string, password: string}) {
     return this.afAuth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(value.email, value.password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['app']);
-        });
-        this.SetUserData(result.user);
+        this.setUserData(result.user);
       })
+      .then(() => this.router.navigate(['app']))
       .catch((error) => {
         window.alert(error.message);
       });
@@ -58,7 +56,7 @@ export class AuthService {
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user) {
+  setUserData(user: User) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -69,56 +67,18 @@ export class AuthService {
       // photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
+    console.log('setting user');
     return userRef.set(userData, {
       merge: true,
     });
   }
 
   // Sign out
-  SignOut() {
+  signOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['login']);
     });
   }
 
-  // Sign up with email/password
-  /* SignUp(email, password) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        // Call the SendVerificaitonMail() function when new user sign up and returns promise
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
-      }).catch((error) => {
-        window.alert(error.message)
-      })
-  } */
-
-  // Send email verfificaiton when new user sign up
-  /*SendVerificationMail() {
-    return this.afAuth.onAuthStateChanged((user) => {
-      user.sendEmailVerification();
-    })
-    .then(() => {
-      this.router.navigate(['verify-email-address']);
-    })
-  }*/
-
-  // Sign in with Google
-  /*GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
-  }*/
-
-  // Auth logic to run auth providers
-  /*AuthLogin(provider) {
-    return this.afAuth.signInWithPopup(provider)
-    .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['app']);
-        })
-      this.SetUserData(result.user);
-    }).catch((error) => {
-      window.alert(error)
-    })
-  }*/
 }
