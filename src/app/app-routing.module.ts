@@ -4,14 +4,9 @@ import { LoginComponent } from './components/login/login.component';
 import { TodoComponent } from './components/todo/todo.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: LoginComponent,
-  },
-  {
-    path: 'app',
-    component: TodoComponent,
-  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'app', component: TodoComponent },
 ];
 
 @NgModule({

@@ -6,6 +6,15 @@ export const environment = {
   production: false
 };
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyDGX8jfeiFVmqzS-AmXXtjSoOBNQ29Knlk",
+  authDomain: "angular-todo-c6252.firebaseapp.com",
+  databaseURL: "https://angular-todo-c6252.firebaseio.com",
+  projectId: "angular-todo-c6252",
+  storageBucket: "angular-todo-c6252.appspot.com",
+  messagingSenderId: "169983727754",
+  appId: "1:169983727754:web:fb62b87a91cfaa741f3573"
+};
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
