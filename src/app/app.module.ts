@@ -29,6 +29,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { firebaseConfig } from '../environments/environment.prod';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { firebaseConfig } from '../environments/environment.prod';
     TodoComponent,
     TodoFormComponent,
     TodosComponent,
+    RegisterComponent,
   ],
   imports: [
     //AngularFireAuth,

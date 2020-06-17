@@ -1,0 +1,44 @@
+<h3>Login In</h3>
+
+<form
+  [formGroup]="registerForm"
+  class="add_todo-form"
+  novalidate
+  (ngSubmit)="authService.register(loginForm.value)"
+>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="example@gmail.com" formControlName="email" />
+    <mat-error
+      *ngIf="
+        !registerForm.controls['email'].valid &&
+        registerForm.controls['email'].touched
+      "
+    >
+      Is it real email?
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="password" formControlName="password" />
+    <mat-error
+      *ngIf="
+        !registerForm.controls['password'].valid &&
+        registerForm.controls['password'].touched
+      "
+    >
+      Type something
+    </mat-error>
+  </mat-form-field>
+  <button
+    mat-flat-button
+    color="accent"
+    type="submit"
+    [disabled]="!registerForm.valid"
+  >
+    Register
+  </button>
+</form>
+
+<a routerLink="/login" routerLinkActive="active">Login</a>

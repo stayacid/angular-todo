@@ -43,15 +43,17 @@ export class AuthService {
   // Sign in with email/password
   async signIn(value: { email: string; password: string }) {
     try {
-      const result = await this.afAuth.signInWithEmailAndPassword(value.email, value.password);
+      const result = await this.afAuth.signInWithEmailAndPassword(
+        value.email,
+        value.password
+      );
       this.setUserData(result.user);
       this.afAuth.authState.subscribe((user) => {
         if (user) {
           this.router.navigate(['app']);
         }
       });
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error.message);
     }
   }
@@ -73,6 +75,31 @@ export class AuthService {
     return userRef.set(userData, {
       merge: true,
     });
+  }
+
+  // Sign up with email/password
+  async signUp(value: { email: string; password: string }) {
+    try {
+      const result = await this.afAuth.createUserWithEmailAndPassword(
+        value.email,
+        value.password
+      );
+      /* Call the SendVerificaitonMail() function when new user sign
+      up and returns promise */
+      this.sendVerificationMail();
+      this.setUserData(result.user);
+    } catch (error) {
+      window.alert(error.message);
+    }
+  }
+
+  // Send email verfificaiton when new user sign up
+  sendVerificationMail() {
+    /*return this.afAuth.currentUser.sendEmailVerification()
+      .then(() => {
+        this.router.navigate(['verify-email-address']);
+      })*/
+    return null;
   }
 
   // Sign out
