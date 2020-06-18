@@ -1,10 +1,10 @@
-<h3>Login In</h3>
+<h3>Registation</h3>
 
 <form
   [formGroup]="registerForm"
   class="add_todo-form"
   novalidate
-  (ngSubmit)="authService.register(loginForm.value)"
+  (ngSubmit)="authService.signUp(registerForm.value)"
 >
   <mat-form-field>
     <mat-label>Email</mat-label>
@@ -28,7 +28,15 @@
         registerForm.controls['password'].touched
       "
     >
-      Type something
+      Password must contain at least 1 number and 1 uppercase letter
+    </mat-error>
+    <mat-error
+      *ngIf="
+        (registerForm.controls['password'].errors.actualLength < registerForm.controls['password'].errors.requiredLength) &&
+        registerForm.controls['password'].touched
+      "
+    >
+      Min 8 characters, max 16 characters
     </mat-error>
   </mat-form-field>
   <button
