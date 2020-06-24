@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
 // import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -18,7 +18,6 @@ export class AuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning)
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -95,11 +94,10 @@ export class AuthService {
 
   // Send email verfificaiton when new user sign up
   sendVerificationMail() {
-    /*return this.afAuth.currentUser.sendEmailVerification()
+    return this.afAuth.currentUser.then(u => u.sendEmailVerification())
       .then(() => {
         this.router.navigate(['verify-email-address']);
-      })*/
-    return null;
+      })
   }
 
   // Sign out
